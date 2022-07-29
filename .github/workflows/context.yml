@@ -20,7 +20,7 @@ jobs:
     - name: Failure
       run: eccho "failure"
     - name: After Failure
-      if: failure()
+    #  if: failure()
       run: echo "After failure"
     - name: Always
       if: always()
