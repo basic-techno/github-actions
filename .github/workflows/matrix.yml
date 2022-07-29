@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
       - name: log node version
-        if: IS_UBUNTU_8 == "false"
+        if: IS_UBUNTU_8 == "true"
         run: |
           node -v
           echo $IS_UBUNTU_8 
