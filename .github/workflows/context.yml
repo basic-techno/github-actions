@@ -25,4 +25,4 @@ jobs:
       run: echo "After failure"
     - name: Always
       if: always()
-      run: echo "$ VIVEK $"
+      run: echo "$ VIVEK $$"
