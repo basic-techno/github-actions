@@ -5,16 +5,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node_version: [6, 7, 8]
+        node_version: [7]
         include:
           - os: ubuntu-latest
             node_version: 4
-            is_ubuntu_8: "true"
+            is_ubuntu_8: "false"
         exclude: 
           - os: ubuntu-latest
             node_version: 7
           - os: macos-latest
-            node_version: 6
+            node_version: 7
     runs-on: ${{ matrix.os }}
     env:
       IS_UBUNTU_8: ${{ matrix.is_ubuntu_8 }}
