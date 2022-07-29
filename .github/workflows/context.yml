@@ -19,7 +19,7 @@ jobs:
     - name: Before failure
       run: echo "Before Failure"
     - name: Failure
-      run: eccho "failure"
+      run: echo "failure"
     - name: After Failure
     #  if: failure()
       run: echo "After failure"
