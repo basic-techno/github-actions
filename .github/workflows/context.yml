@@ -9,7 +9,7 @@ jobs:
         run: echo ${{ contains( 'hello' , 'll' ) }}
   one:
     runs-on: ubuntu-latest
-    needs: ["function"]
+    needs: ["functions"]
     if: github.event_name == 'push'
     steps:
     - name: Dump Github Context 
