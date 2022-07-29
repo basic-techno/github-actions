@@ -9,8 +9,19 @@ jobs:
         run: echo ${{ contains( 'hello' , 'll' ) }}
   one:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     steps:
     - name: Dump Github Context 
       env: 
         GITHUB_CONTEXT: ${{ toJSON(github) }}
       run: echo "$GITHUB_CONTEXT"
+    - name: Before failure
+      run: echo "Before Failure"
+    - name: Failure
+      run: eccho "failure"
+    - name: After Failure
+      if: failure()
+      run: echo "After failure"
+    - name: Always
+      if: always()
+      run: echo "VIVEK"
