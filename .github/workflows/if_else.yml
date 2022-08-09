@@ -1,0 +1,27 @@
+name: If Else
+
+on:
+  workflow_dispatch:
+    inputs:
+      terraform_action:
+        type: choice
+        description: "k8s cluster owner name"
+        required: true
+        options:
+        - Apply
+        - Destroy
+        - Plan
+        - Validate
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Terraform Operations
+      run: |
+        if [[ ${{ github.event.inputs.owner }} == 'Apply' ]]; then
+          echo "Operation Apply Performed"
+        fi
+        if [[ ${{ github.event.inputs.owner }} == 'Destroy' ]]; then
+          echo "Operation Destroy Performed"
+        fi
