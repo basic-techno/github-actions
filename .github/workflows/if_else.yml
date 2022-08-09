@@ -19,9 +19,9 @@ jobs:
     steps:
     - name: Terraform Operations
       run: |
-        if [[ ${{ github.event.inputs.owner }} == 'Apply' ]]; then
+        if [[ ${{ github.event.inputs.terraform_action }} == 'Apply' ]]; then
           echo "Operation Apply Performed"
         fi
-        if [[ ${{ github.event.inputs.owner }} == 'Destroy' ]]; then
+        if [[ ${{ github.event.inputs.terraform_action }} == 'Destroy' ]]; then
           echo "Operation Destroy Performed"
         fi
