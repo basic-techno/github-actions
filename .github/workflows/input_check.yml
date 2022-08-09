@@ -1,0 +1,20 @@
+name: Mixed inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: "Select Name"
+        required: true
+        options:
+          - "vivek"
+          - "manisha"
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.name }}"
