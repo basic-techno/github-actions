@@ -3,13 +3,51 @@ name: Mixed inputs
 on:
   workflow_dispatch:
     inputs:
-      name:
+      owner:
+        type: string
+        description: "k8s cluster owner name"
+        required: true 
+      k8_version:
         type: choice
-        description: "Select Name"
+        description: "Select k8 Version"
         required: true
         options:
-          - "vivek"
-          - "manisha"
+          - v1.22.5
+          - v1.21.5
+      cluster_name:
+        type: string
+        description: "k8s Cluster Name"
+        required: true   
+      master_cpu:
+        type: string
+        description: "Master CPU"
+        required: true
+        default: "2"
+      master_ram:
+        type: string
+        description: "Master Ram in MB"
+        required: true
+        default: "4096"
+      master_disksize:
+        type: string
+        description: "Master disksize in GB"
+        required: true
+        default: "50"
+      worker_cpu:
+        type: string
+        description: "Worker CPU"
+        required: true
+        default: "2"
+      worker_ram:
+        type: string
+        description: "Worker Ram in MB"
+        required: true
+        default: "4096"
+      worker_disksize:
+        type: string
+        description: "worker disksize in GB"
+        required: true
+        default: "50"
 
 jobs:
   greet:
@@ -17,4 +55,4 @@ jobs:
 
     steps:
     - name: Send greeting
-      run: echo "${{ github.event.inputs.name }}"
+      run: echo "${{ github.event.inputs.k8_version }}"
