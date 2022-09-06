@@ -9,7 +9,7 @@ jobs:
       - name: Checkout other repo
         uses: actions/checkout@v1
         with:
-          repository: saubermacherag/ansible-playbook-docker-action
+          repository: saubermacherag/ansible-playbook-docker-action@master
 
       - name: Execute Playbook Action Step
         id: Execution
