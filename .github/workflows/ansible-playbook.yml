@@ -6,7 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Execute Sample Playbook
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout other repo
+        uses: actions/checkout@v1
+        with:
+          repository: saubermacherag/ansible-playbook-docker-action
+
       - name: Execute Playbook Action Step
         id: Execution
         uses: saubermacherag/ansible-playbook-docker-action@master
