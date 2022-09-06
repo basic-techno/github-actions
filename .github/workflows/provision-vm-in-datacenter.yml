@@ -1,0 +1,143 @@
+name: Provision Virtual Machine in Datacenter
+on:
+  workflow_dispatch:
+    inputs:
+      terraform_action:
+        type: choice
+        description: "Terraform Action"
+        required: true
+        options:
+        - Apply
+        - Destroy
+        - Plan
+      owner:
+        type: string
+        description: "Owner Name"
+        required: true
+      vm_name:
+        type: string
+        description: "Virtual Machine Name"
+        required: true
+      cpu:
+        type: string
+        description: "CPU"
+        required: true
+        default: "2"
+      ram: 
+        type: string
+        description: "RAM in mb"
+        required: true
+        default: "2"
+      disksize:
+        type: string
+        description: "Disk size in gb"
+        required: true
+        default: "2"
+      datacenter:
+        type: choice
+        description: "Datacenter"
+        required: true
+        options:
+        - "Colospace Boston"
+      datastore:
+        type: choice
+        description: "Datastore"
+        required: true
+        options:
+        - "datastore1"
+        - "datastore2"
+        - "datastore3"
+        - "datastore4"
+        - "datastore5"
+        - "datastore6"
+        - "datastore7"
+      vsphere-cluster:
+        type: choice
+        description: "Vsphere Cluster"
+        required: true
+        options:
+        - "ocp-1"      
+      vm-network:
+        type: choice
+        description: "VM Network"
+        required: true
+        options:
+          - "DeploymentNetwork"
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install OpenVPN
+        run: |
+          sudo apt-get update
+          sudo apt install sshpass
+          sudo apt-get --assume-yes --no-install-recommends install openvpn
+          echo "${{ secrets.VPN_FILE }}" > config.ovpn
+      
+      - name: Connect VPN
+        run: |
+          echo "${{ secrets.VPN_FILE }}" | base64 --decode > config.ovpn
+          sudo openvpn --config "config.ovpn" --log "vpn.log" --daemon
+      
+      - name: Wait for a VPN connection
+        timeout-minutes: 1
+        run: until ping -c1 ${{ secrets.HOST }}; do sleep 2; done
+    
+      - name: Terraform Operation
+        env:
+          ANSIBLE_HOST : ${{ secrets.ANSIBLE_HOST }}
+          ANSIBLE_PASSWORD: ${{ secrets.ANSIBLE_PASSWORD}}
+          ANSIBLE_USERNAME : ${{ secrets.ANSIBLE_USERNAME  }}
+            
+        run: |
+          sshpass -p "${ANSIBLE_PASSWORD}" ssh -tt -o StrictHostKeyChecking=no ${ANSIBLE_USERNAME}@${ANSIBLE_HOST} '
+              export VSPHERE_USERNAME = ${{ secrets.VSPHERE_USERNAME }}
+              export VSPHERE_PASSWORD = ${{ secrets.VSPHERE_PASSWORD }}
+              export VCENTER :  ${{ secrets.VCENTER }}
+              mkdir ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}
+              mkdir ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}/${{ github.event.inputs.vm_name }}
+              cp ~/multicloud-infrastructure-modules/vsphere/sample-vm/main.tf ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}/${{ github.event.inputs.vm_name }}/
+              cp ~/multicloud-infrastructure-modules/vsphere/sample-vm/variables.tf ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}/${{ github.event.inputs.vm_name }}/
+              cp ~/multicloud-infrastructure-modules/vsphere/sample-vm/output.tf ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}/${{ github.event.inputs.vm_name }}/
+              cd ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}/${{ github.event.inputs.vm_name }}
+              pwd
+              cat <<EOF >> variables.tfvars
+          username = $VSPHERE_USERNAME
+          password = $VSPHERE_PASSWORD
+          vcenter  = $VCENTER
+          datacenter = "${{ github.event.inputs.datacenter }}"
+          datastore = "${{ github.event.inputs.datastore }}"
+          template-folder = "Templates"
+          vsphere-cluster = "${{ github.event.inputs.vsphere-cluster }}"
+          owner = "${{ github.event.inputs.owner }}"
+          vm_name = "${{ github.event.inputs.vm_name }}"
+          cpu = "${{ github.event.inputs.cpu }}"
+          vm-network = "${{ github.event.inputs.vm-network }}"
+          cores-per-socket = 1
+          ram = "${{ github.event.inputs.ram }}"
+          disksize = "${{ github.event.inputs.disksize }}"
+          vm-template-name = "ubuntu-20-04-live-server-template"
+          EOF
+
+              if [[ ${{ github.event.inputs.terraform_action }} == 'Apply' ]]; then
+                 echo "Operation Apply Performing"
+              fi
+              if [[ ${{ github.event.inputs.terraform_action }} == 'Destroy' ]]; then
+                 echo "Operation Destroy Performed"
+              fi 
+              if [[ ${{ github.event.inputs.terraform_action }} == 'Plan' ]]; then
+                 echo "terraform plan is executing... "
+                 cd ~/multicloud-infrastructure-modules/vsphere/VirtualMachines/${{ github.event.inputs.owner }}/${{ github.event.inputs.vm_name }}
+                 terraform plan --var-file=variables.tfvars
+              fi    
+              exit '
+        
+              
+      - name: Kill VPN connection
+        if: always()
+        run: |
+         sudo chmod 777 vpn.log
+         sudo killall openvpn    
+      
