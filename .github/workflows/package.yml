@@ -5,10 +5,18 @@ on:
         description: 'Kubeslice Controller'
         required: true 
         type: boolean
+      kubeslice_controller_package_path:
+        description: 'Kubeslice Controller Package Path'
+        required: false 
+        type: string
       Kubeslice_Woker:
         description: 'Kubeslice Worker'
         required: true 
         type: boolean 
+      kubeslice_worker_package_path:
+        description: 'Kubeslice Worker Package Path'
+        required: false 
+        type: string
 
 jobs:
   update-worker-to-rancher-partner-chart:
@@ -16,7 +24,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Worker
-        run: echo ${{ inputs.Kubeslice_Woker }} 
+        uses: actions/checkout@master
+        with:
+          repository: basictechno/partner-charts
+          path: 'worker'
+          ref: 'avesha'
+          fetch-depth: 0
+      - name: rancher
+        shell: bash
+        run: | 
+          make 
+          export PACKAGE=kubeslice-worker
+          cd packages/kubeslice-worker
+          cat << EOF > package.yaml
+          url: "${{ github.event.inputs.kubeslice_controller_package_path }}"
+          packageVersion: 00
+          EOF
+          cd ../../
+          make prepare
+          git add -A && git commit -m "downloading worker chart"
+          make charts
+          git add -A && git commit -m "creating worker chart"
+          make clean
+          make validate
+          git add -A && git commit -m "cleaning and validating worker chart"
+         # git push 
 
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
