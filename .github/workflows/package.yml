@@ -71,7 +71,6 @@ jobs:
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
-          git push
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
