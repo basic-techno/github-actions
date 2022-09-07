@@ -44,10 +44,8 @@ jobs:
           packageVersion: 00
           EOF
           cat package.yaml
-          #cd ../../
-          pwd
-          ls
-         # make prepare
+          cd ../../
+          make prepare
         #  git add -A && git commit -m "downloading worker chart"
           #make charts
           #git add -A && git commit -m "creating worker chart"
