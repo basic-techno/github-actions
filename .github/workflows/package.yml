@@ -40,7 +40,7 @@ jobs:
           export PACKAGE=kubeslice-worker
           cd packages/kubeslice-worker
           cat << EOF > package.yaml
-          url: "${{ inputs.kubeslice_controller_package_path }}"
+          url: "${{ inputs.kubeslice_worker_package_path }}"
           packageVersion: 00
           EOF
           cat package.yaml
