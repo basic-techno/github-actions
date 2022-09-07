@@ -46,6 +46,8 @@ jobs:
           cat package.yaml
           cd ../../
           make prepare
+          git config --global user.email "avesha-bot@aveshasystems.com"
+          git config --global user.name "Avesha Bot"
           git add -A && git commit -m "downloading worker chart"
           make charts
           git add -A && git commit -m "creating worker chart"
