@@ -65,6 +65,7 @@ jobs:
           echo "**********************"
           echo "Charts Validation"
           echo "**********************"
+          export PACKAGE=kubeslice-worker
           make validate
           echo "**********************"
           echo "Publishing Charts"
