@@ -77,7 +77,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_url: partner-charts
           branch: avesha
-          directory: worker
 
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
