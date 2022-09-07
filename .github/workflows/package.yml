@@ -43,14 +43,17 @@ jobs:
           url: "${{ github.event.inputs.kubeslice_controller_package_path }}"
           packageVersion: 00
           EOF
-          cd ../../
-          make prepare
-          git add -A && git commit -m "downloading worker chart"
-          make charts
-          git add -A && git commit -m "creating worker chart"
-          make clean
-          make validate
-          git add -A && git commit -m "cleaning and validating worker chart"
+          cat package.yaml
+          #cd ../../
+          pwd
+          ls
+         # make prepare
+        #  git add -A && git commit -m "downloading worker chart"
+          #make charts
+          #git add -A && git commit -m "creating worker chart"
+          #make clean
+          #make validate
+          #git add -A && git commit -m "cleaning and validating worker chart"
          # git push 
 
   update-controller-to-rancher-partner-chart:
