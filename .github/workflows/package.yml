@@ -66,11 +66,12 @@ jobs:
           echo "Charts Validation"
           echo "**********************"
           export PACKAGE=kubeslice-worker
-          make validate
-          echo "**********************"
-          echo "Publishing Charts"
-          echo "**********************"
-          git push 
+          cat packages/kubeslice-worker/package.yaml
+         # make validate
+         # echo "**********************"
+        #  echo "Publishing Charts"
+        # echo "**********************"
+        #  git push 
 
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
