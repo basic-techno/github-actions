@@ -74,6 +74,7 @@ jobs:
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
+          repository: basic-techno/partner-charts
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: avesha
 
