@@ -66,6 +66,7 @@ jobs:
           echo "Charts Validation"
           echo "**********************"
           export PACKAGE=kubeslice-worker
+          echo $PACKAGE
           make validate
           git add -A && git commit -m "validating worker chart"
           echo "**********************"
