@@ -67,7 +67,7 @@ jobs:
           echo "**********************"
           export PACKAGE=kubeslice-worker
           cat packages/kubeslice-worker/package.yaml
-         # make validate
+          make validate
          # echo "**********************"
         #  echo "Publishing Charts"
         # echo "**********************"
