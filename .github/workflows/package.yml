@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+    inputs:
+      Kubeslice_Controller:
+        description: 'Kubeslice Controller'
+        required: true 
+        type: boolean
+      Kubeslice_Woker:
+        description: 'Kubeslice Worker'
+        required: true 
+        type: boolean 
+
+jobs:
+  print-tag:
+    runs-on: ubuntu-latest
+    if:  ${{ inputs.Kubeslice_Woker }} 
+    steps:
+      - name: Print the input tag to STDOUT
+        run: echo  The tags are ${{ inputs.Kubeslice_Woker }} 
