@@ -11,9 +11,12 @@ on:
         type: boolean 
 
 jobs:
-  print-tag:
+  update-charts-to-rancher-partner-chart:
     runs-on: ubuntu-latest
-    if:  ${{ inputs.Kubeslice_Woker }} 
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.Kubeslice_Woker }} 
+      - name: Worker
+        if:  ${{ inputs.Kubeslice_Woker }} 
+        run: echo ${{ inputs.Kubeslice_Woker }} 
+      - name: Controller
+        if:  ${{ inputs.Kubeslice_Controller }}
+        run: echo ${{ inputs.Kubeslice_Woker }}
