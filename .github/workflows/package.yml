@@ -45,16 +45,33 @@ jobs:
           EOF
           cat package.yaml
           cd ../../
+          export PACKAGE=kubeslice-worker
           make prepare
           git config --global user.email "avesha-bot@aveshasystems.com"
           git config --global user.name "Avesha Bot"
           git add -A && git commit -m "downloading worker chart"
+          export PACKAGE=kubeslice-worker
           make charts
+          echo "**********************"
+          echo "Charts Created"
+          echo "**********************"
           git add -A && git commit -m "creating worker chart"
+          export PACKAGE=kubeslice-worker
+          echo "**********************"
+          echo "Charts Cleaning"
+          echo "**********************"
           make clean
+          git add -A && git commit -m "cleaning worker chart"
+          echo "**********************"
+          echo "Charts Validation"
+          echo "**********************"
+          export PACKAGE=kubeslice-worker
           make validate
-          git add -A && git commit -m "cleaning and validating worker chart"
-         # git push 
+          git add -A && git commit -m "validating worker chart"
+          echo "**********************"
+          echo "Publishing Charts"
+          echo "**********************"
+          git push 
 
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
