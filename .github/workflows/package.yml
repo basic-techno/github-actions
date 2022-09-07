@@ -47,8 +47,8 @@ jobs:
           cd ../../
           export PACKAGE=kubeslice-worker
           make prepare
-          git config --global user.email "avesha-bot@aveshasystems.com"
-          git config --global user.name "Avesha Bot"
+          git config --global user.email "vivek.bangare2492@gmail.com"
+          git config --global user.name "basic-techno"
           git add -A && git commit -m "downloading worker chart"
           export PACKAGE=kubeslice-worker
           make charts
@@ -71,6 +71,7 @@ jobs:
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
+          git push
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
