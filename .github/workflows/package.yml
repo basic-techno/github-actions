@@ -33,6 +33,8 @@ jobs:
       - name: rancher
         shell: bash
         run: | 
+          pwd
+          ls
           make 
           export PACKAGE=kubeslice-worker
           cd packages/kubeslice-worker
