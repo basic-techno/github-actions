@@ -71,7 +71,11 @@ jobs:
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
-          git push 
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: avesha
 
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
