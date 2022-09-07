@@ -11,12 +11,17 @@ on:
         type: boolean 
 
 jobs:
-  update-charts-to-rancher-partner-chart:
+  update-worker-to-rancher-partner-chart:
+    if:  ${{ inputs.Kubeslice_Woker }} 
     runs-on: ubuntu-latest
     steps:
       - name: Worker
-        if:  ${{ inputs.Kubeslice_Woker }} 
         run: echo ${{ inputs.Kubeslice_Woker }} 
+
+  update-controller-to-rancher-partner-chart:
+    if:  ${{ inputs.Kubeslice_Controller }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Controller
-        if:  ${{ inputs.Kubeslice_Controller }}
         run: echo ${{ inputs.Kubeslice_Controller }}
+  
