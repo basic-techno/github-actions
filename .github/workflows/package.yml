@@ -26,6 +26,7 @@ jobs:
       - name: Worker
         uses: actions/checkout@v3
         with:
+          persist-credentials: false
           repository: basic-techno/partner-charts
           path: 'worker'
           ref: 'avesha'
@@ -70,7 +71,7 @@ jobs:
           echo "Publishing Charts"
           echo "**********************"
           git branch
-          git push
+          git push -u origin avesha
         #  git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
