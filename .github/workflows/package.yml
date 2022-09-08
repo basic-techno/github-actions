@@ -25,12 +25,13 @@ jobs:
     steps:
       - name: Worker
         uses: actions/checkout@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           repository: basic-techno/partner-charts
           path: 'worker'
           ref: 'avesha'
           fetch-depth: 0
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: rancher
         shell: bash
         run: | 
@@ -69,8 +70,12 @@ jobs:
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
-          git push
-         # git push https://${{ secrets.GITHUB_TOKEN }}@github.com/basic-techno/partner-charts,git
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: avesha
+        # git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
     runs-on: ubuntu-latest
