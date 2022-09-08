@@ -71,13 +71,7 @@ jobs:
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PAT }}
-          branch: avesha
-          directory: worker
-          github_url: basic-techno/partner-charts
+          git push -u origin avesha
         #  git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
