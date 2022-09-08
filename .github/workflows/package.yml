@@ -75,7 +75,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_url: https://github.com/basic-techno/partner-charts.git
+          github_url: partner-charts
           branch: avesha
           directory: worker
         #  git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
