@@ -74,6 +74,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_url: basic-techno/partner-charts
           branch: avesha
         # git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
   update-controller-to-rancher-partner-chart:
