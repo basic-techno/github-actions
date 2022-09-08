@@ -70,6 +70,8 @@ jobs:
           echo "**********************"
           pwd
           ls
+          git config --global user.email "vivek.bangare2492@gmail.com"
+          git config --global user.name "basic-techno"
           git push -u origin avesha
 
   update-controller-to-rancher-partner-chart:
