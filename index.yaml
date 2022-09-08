@@ -3533,6 +3533,44 @@ entries:
     urls:
     - assets/kong/kong-2.3.1.tgz
     version: 2.3.1
+  kubeslice-worker:
+  - annotations:
+      catalog.cattle.io/certified: partner
+      catalog.cattle.io/display-name: Kubeslice Worker
+      catalog.cattle.io/namespace: kubeslice-system
+      catalog.cattle.io/release-name: kubeslice-worker
+    apiVersion: v2
+    appVersion: 0.2.3
+    created: "2022-09-08T06:45:14.758607425Z"
+    description: A Helm chart for Kubeslice Worker Operator
+    digest: 618dc47b72024777a672b1e871d1b1f8f8feafdf817025511f234c68c501d666
+    keywords:
+    - multicloud
+    - multi cloud
+    - multitenant
+    - multitenancy
+    - multi tenant
+    - multi tenancy
+    - federated mesh
+    - federated clusters
+    - federated k8s
+    - federated kubernetes
+    - cluster sprawl
+    - sprawl
+    - namespace sprawl
+    - network policy
+    - overlay network
+    - mesh network
+    - security
+    - networking
+    - infrastructure
+    - application
+    kubeVersion: '>= 1.19'
+    name: kubeslice-worker
+    type: application
+    urls:
+    - assets/kubeslice-worker/kubeslice-worker-0.4.500.tgz
+    version: 0.4.500
   kuma:
   - annotations:
       catalog.cattle.io/certified: partner
