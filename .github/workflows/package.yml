@@ -31,7 +31,7 @@ jobs:
           path: 'worker'
           ref: 'avesha'
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
       - name: Rancher
         shell: bash
         run: | 
@@ -74,7 +74,7 @@ jobs:
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           branch: avesha
           directory: worker
         #  git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
