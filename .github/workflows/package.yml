@@ -47,7 +47,7 @@ jobs:
           cd ../../
           export PACKAGE=kubeslice-worker
           make prepare
-          git config remote.origin.url https://github.com/basic-techno/partner-charts.git
+          git config remote.origin.url https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git
           git config --global user.email "vivek.bangare2492@gmail.com"
           git config --global user.name "basic-techno"
           git add -A && git commit -m "downloading worker chart"
