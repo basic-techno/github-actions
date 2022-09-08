@@ -47,6 +47,7 @@ jobs:
           cd ../../
           export PACKAGE=kubeslice-worker
           make prepare
+          git config remote.origin.url https://github.com/basic-techno/partner-charts.git
           git config --global user.email "vivek.bangare2492@gmail.com"
           git config --global user.name "basic-techno"
           git add -A && git commit -m "downloading worker chart"
@@ -70,8 +71,11 @@ jobs:
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
-          git branch
-          git push -u origin avesha
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
         #  git push 'https://${{ secrets.PAT }}@github.com/basic-techno/partner-charts.git'
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
