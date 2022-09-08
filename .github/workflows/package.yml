@@ -33,8 +33,6 @@ jobs:
       - name: rancher
         shell: bash
         run: | 
-          pwd
-          ls
           cd worker
           make 
           export PACKAGE=kubeslice-worker
@@ -66,17 +64,13 @@ jobs:
           echo "Charts Validation"
           echo "**********************"
           export PACKAGE=kubeslice-worker
-          cat packages/kubeslice-worker/package.yaml
           make validate
           echo "**********************"
           echo "Publishing Charts"
           echo "**********************"
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_url: partner-charts
-          branch: avesha
+          pwd
+          ls
+          git push -u origin avesha
 
   update-controller-to-rancher-partner-chart:
     if:  ${{ inputs.Kubeslice_Controller }}
