@@ -1,0 +1,15 @@
+name: Upload artifact
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: create one file
+      run: |
+        echo "Hey Vivek" > test.txt
+    - name: upload artifact 
+      uses: actions/upload-artiact@v1
+      with: 
+        name: text-file
+        path: test.txt
