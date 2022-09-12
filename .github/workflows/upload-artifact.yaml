@@ -9,7 +9,7 @@ jobs:
       run: |
         echo "Hey Vivek" > test.txt
     - name: upload artifact 
-      uses: actions/upload-artiact@v1
+      uses: actions/upload-artifact@v1
       with: 
         name: text-file
         path: test.txt
