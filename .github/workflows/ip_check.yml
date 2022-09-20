@@ -1,0 +1,14 @@
+name: IP check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ProvisionKubernetesCluster:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create varibales.tfvars file
+      run: |
+        ip=10.100.100.15
+        IFS="." read -a range <<< $ip
+        echo "${range[3]}"
