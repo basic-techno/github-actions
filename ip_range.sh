@@ -5,8 +5,11 @@ ip=10.100.100.15
 IFS="." read -a range <<< $ip
 echo "${range[0]}"
 #echo "hello $begin"
-
-for ips in {${range[0]}..5}
+begin=$((${range[3]}))
+echo $begin
+end=$((begin+3))
+for (( c=$begin; c<=$end; c++ ))
 do 
-  echo "10.100.100.$ips"
+  echo "10.100.100.$c"
 done
+
