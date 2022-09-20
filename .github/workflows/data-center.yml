@@ -55,13 +55,13 @@ jobs:
       run: |
         master_config="${{ inputs.master_config }}"
         IFS="," read -a masterinputs <<< $master_config
-        echo "CPU=${masterinputs[0]}"
-        echo "RAM=${masterinputs[1]}"
-        echo "STORAGE=${masterinputs[2]}"
+        echo "MASTER_CPU=${masterinputs[0]}"
+        echo "MASTER_RAM=$(1024 * ${masterinputs[1]})"
+        echo "MASTER_STORAGE=${masterinputs[2]}"
 
         worker_config="${{ inputs.worker_config }}"
         IFS="," read -a workerinputs <<< $worker_config
-        echo "CPU=${workerinputs[0]}"
-        echo "RAM=${workerinputs[1]}"
-        echo "STORAGE=${workerinputs[2]}"
-        echo "COUNT=${workerinputs[3]}"
+        echo "WORKER_CPU=${workerinputs[0]}"
+        echo "WORKER_RAM=$(1024 * ${workerinputs[1]})"
+        echo "WORKER_STORAGE=${workerinputs[2]}"
+        echo "WORKER_COUNT=${workerinputs[3]}"
