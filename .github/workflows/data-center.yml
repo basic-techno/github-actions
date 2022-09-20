@@ -1,4 +1,4 @@
-name: Mixed inputs
+name: Data center
 
 on:
   workflow_dispatch:
