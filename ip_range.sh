@@ -6,7 +6,7 @@ IFS="." read -a range <<< $ip
 echo "${range[0]}"
 #echo "hello $begin"
 
-#for ips in {$begin..5}
-#do 
-#  echo "10.100.100.$ips"
-#done
+for ips in {${range[0]}..5}
+do 
+  echo "10.100.100.$ips"
+done
