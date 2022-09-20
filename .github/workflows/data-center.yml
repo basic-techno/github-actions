@@ -55,5 +55,8 @@ jobs:
       run: |
         worker_config="${{ inputs.worker_config }}"
         IFS="," read -a myarray <<< $worker_config
-        echo "My array: ${myarray[@]}"
+        echo "${myarray[0]}"
+        echo "${myarray[1]}"
+        echo "${myarray[2]}"
+        echo "${myarray[3]}"
         echo "Number of elements in the array: ${#myarray[@]}"
