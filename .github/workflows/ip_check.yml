@@ -13,7 +13,7 @@ jobs:
         IFS="." read -a range <<< $ip
         start=${range[3]}
         end=$((start+3))
-        for (( c=$start; c<=$end; c++ ))
+        for (( c=$start+1; c<=$end; c++ ))
         do 
           echo "10.100.100.$c"
         done 
