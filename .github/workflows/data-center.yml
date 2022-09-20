@@ -53,10 +53,15 @@ jobs:
     steps:
     - name: Create varibales.tfvars file
       run: |
+        master_config="${{ inputs.master_config }}"
+        IF="," read -a masterinputs <<< $master_config
+        echo "CPU=${masterinputs[0]}"
+        echo "RAM=${masterinputs[1]}"
+        echo "STORAGE=${masterinputs[2]}"
+        
         worker_config="${{ inputs.worker_config }}"
-        IFS="," read -a myarray <<< $worker_config
-        echo "${myarray[0]}"
-        echo "${myarray[1]}"
-        echo "${myarray[2]}"
-        echo "${myarray[3]}"
-        echo "Number of elements in the array: ${#myarray[@]}"
+        IFS="," read -a workerinputs <<< $worker_config
+        echo "CPU=${workerinputs[0]}"
+        echo "RAM=${workerinputs[1]}"
+        echo "STORAGE=${workerinputs[2]}"
+        echo "COUNT=${workerinputs[3]}"
