@@ -11,8 +11,8 @@ jobs:
       run: |
         ip=10.100.100.15
         IFS="." read -a range <<< $ip
-        echo "${range[3]}"
-        for ips in {$(({range[3]}))..5}
+        begin="${range[3]}"
+        for ips in {$begin..5}
         do 
           echo "10.100.100.$ips"
         done 
