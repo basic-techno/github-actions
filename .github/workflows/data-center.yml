@@ -54,11 +54,11 @@ jobs:
     - name: Create varibales.tfvars file
       run: |
         master_config="${{ inputs.master_config }}"
-        IF="," read -a masterinputs <<< $master_config
+        IFS="," read -a masterinputs <<< $master_config
         echo "CPU=${masterinputs[0]}"
         echo "RAM=${masterinputs[1]}"
         echo "STORAGE=${masterinputs[2]}"
-        
+
         worker_config="${{ inputs.worker_config }}"
         IFS="," read -a workerinputs <<< $worker_config
         echo "CPU=${workerinputs[0]}"
