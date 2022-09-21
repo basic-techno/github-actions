@@ -20,7 +20,7 @@ on:
         required: true
       master_config: 
         type: string 
-        description: "Master node configurations"
+        description: "Master node configurations \t default CPU=2,RAM=2,STORAGE=50GB"
         required: false
       worker_config:
         type: string
