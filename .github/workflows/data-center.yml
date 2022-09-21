@@ -33,6 +33,7 @@ on:
         type: choice
         description: "Datastore"
         required: true
+        default: datastore4
         options:
         - datastore1
         - datastore2
@@ -45,6 +46,7 @@ on:
         type: choice
         description: "Data center"
         required: true
+        default: "datacenter-2"
         options:
           - "datacenter-1"
           - "datacenter-2"
