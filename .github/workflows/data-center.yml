@@ -21,12 +21,12 @@ on:
       master_config: 
         type: string 
         description: "Master node configurations (CPU,RAM,STORAGE)"
-        default: '2,2,50'
+        default: '2,4,50'
         required: false
       worker_config:
         type: string
         description: "Worker node configurations (CPU,RAM,STORAGE,COUNT)"
-        default: '2,2,50,2'
+        default: '2,4,50,2'
         required: false
 
       datastore: 
