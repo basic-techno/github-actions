@@ -8,8 +8,26 @@ on:
         description: "Select k8 Version"
         required: true
         options:
+          - v1.24.3
+          - v1.24.2
+          - v1.24.1
+          - v1.23.9
+          - v1.23.8
+          - v1.23.7
+          - v1.23.6
+          - v1.23.5
+          - v1.22.9
+          - v1.22.9
+          - v1.22.8
+          - v1.22.7
+          - v1.22.6
           - v1.22.5
+          - v1.21.9
+          - v1.21.8
+          - v1.21.7
+          - v1.21.6
           - v1.21.5
+
       owner:
         type: string
         description: "Owner Name"
