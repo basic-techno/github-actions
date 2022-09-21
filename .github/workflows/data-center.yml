@@ -20,11 +20,13 @@ on:
         required: true
       master_config: 
         type: string 
-        description: "Master node configurations \t default CPU=2,RAM=2,STORAGE=50GB"
+        description: "Master node configurations (CPU,RAM,STORAGE)"
+        default: '2,2,50'
         required: false
       worker_config:
         type: string
-        description: "Worker node configurations"
+        description: "Worker node configurations (CPU,RAM,STORAGE,COUNT)"
+        default: '2,2,50,2'
         required: false
 
       datastore: 
